@@ -4,256 +4,259 @@ namespace QuickType
 {
     using System;
     using System.Collections.Generic;
+    using System.Text.Json;
+    using System.Text.Json.Serialization;
 
     using System.Globalization;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
 
     public partial class TopLevel
     {
-        [JsonProperty("$schema")]
+        [JsonPropertyName("$schema")]
         public string Schema { get; set; }
 
-        [JsonProperty("version")]
+        [JsonPropertyName("version")]
         public long Version { get; set; }
 
-        [JsonProperty("newProjectRoot")]
+        [JsonPropertyName("newProjectRoot")]
         public string NewProjectRoot { get; set; }
 
-        [JsonProperty("projects")]
+        [JsonPropertyName("projects")]
         public Projects Projects { get; set; }
 
-        [JsonProperty("defaultProject")]
+        [JsonPropertyName("defaultProject")]
         public string DefaultProject { get; set; }
     }
 
     public partial class Projects
     {
-        [JsonProperty("demo1")]
+        [JsonPropertyName("demo1")]
         public Demo1 Demo1 { get; set; }
     }
 
     public partial class Demo1
     {
-        [JsonProperty("projectType")]
+        [JsonPropertyName("projectType")]
         public string ProjectType { get; set; }
 
-        [JsonProperty("schematics")]
+        [JsonPropertyName("schematics")]
         public Schematics Schematics { get; set; }
 
-        [JsonProperty("root")]
+        [JsonPropertyName("root")]
         public string Root { get; set; }
 
-        [JsonProperty("sourceRoot")]
+        [JsonPropertyName("sourceRoot")]
         public string SourceRoot { get; set; }
 
-        [JsonProperty("prefix")]
+        [JsonPropertyName("prefix")]
         public string Prefix { get; set; }
 
-        [JsonProperty("architect")]
+        [JsonPropertyName("architect")]
         public Architect Architect { get; set; }
     }
 
     public partial class Architect
     {
-        [JsonProperty("build")]
+        [JsonPropertyName("build")]
         public Build Build { get; set; }
 
-        [JsonProperty("serve")]
+        [JsonPropertyName("serve")]
         public Serve Serve { get; set; }
 
-        [JsonProperty("extract-i18n")]
+        [JsonPropertyName("extract-i18n")]
         public ExtractI18N ExtractI18N { get; set; }
 
-        [JsonProperty("test")]
+        [JsonPropertyName("test")]
         public Test Test { get; set; }
     }
 
     public partial class Build
     {
-        [JsonProperty("builder")]
+        [JsonPropertyName("builder")]
         public string Builder { get; set; }
 
-        [JsonProperty("options")]
+        [JsonPropertyName("options")]
         public BuildOptions Options { get; set; }
 
-        [JsonProperty("configurations")]
+        [JsonPropertyName("configurations")]
         public BuildConfigurations Configurations { get; set; }
 
-        [JsonProperty("defaultConfiguration")]
+        [JsonPropertyName("defaultConfiguration")]
         public string DefaultConfiguration { get; set; }
     }
 
     public partial class BuildConfigurations
     {
-        [JsonProperty("production")]
+        [JsonPropertyName("production")]
         public Production Production { get; set; }
 
-        [JsonProperty("development")]
+        [JsonPropertyName("development")]
         public Development Development { get; set; }
     }
 
     public partial class Development
     {
-        [JsonProperty("buildOptimizer")]
+        [JsonPropertyName("buildOptimizer")]
         public bool BuildOptimizer { get; set; }
 
-        [JsonProperty("optimization")]
+        [JsonPropertyName("optimization")]
         public bool Optimization { get; set; }
 
-        [JsonProperty("vendorChunk")]
+        [JsonPropertyName("vendorChunk")]
         public bool VendorChunk { get; set; }
 
-        [JsonProperty("extractLicenses")]
+        [JsonPropertyName("extractLicenses")]
         public bool ExtractLicenses { get; set; }
 
-        [JsonProperty("sourceMap")]
+        [JsonPropertyName("sourceMap")]
         public bool SourceMap { get; set; }
 
-        [JsonProperty("namedChunks")]
+        [JsonPropertyName("namedChunks")]
         public bool NamedChunks { get; set; }
     }
 
     public partial class Production
     {
-        [JsonProperty("budgets")]
+        [JsonPropertyName("budgets")]
         public Budget[] Budgets { get; set; }
 
-        [JsonProperty("fileReplacements")]
+        [JsonPropertyName("fileReplacements")]
         public FileReplacement[] FileReplacements { get; set; }
 
-        [JsonProperty("outputHashing")]
+        [JsonPropertyName("outputHashing")]
         public string OutputHashing { get; set; }
     }
 
     public partial class Budget
     {
-        [JsonProperty("type")]
+        [JsonPropertyName("type")]
         public string Type { get; set; }
 
-        [JsonProperty("maximumWarning")]
+        [JsonPropertyName("maximumWarning")]
         public string MaximumWarning { get; set; }
 
-        [JsonProperty("maximumError")]
+        [JsonPropertyName("maximumError")]
         public string MaximumError { get; set; }
     }
 
     public partial class FileReplacement
     {
-        [JsonProperty("replace")]
+        [JsonPropertyName("replace")]
         public string Replace { get; set; }
 
-        [JsonProperty("with")]
+        [JsonPropertyName("with")]
         public string With { get; set; }
     }
 
     public partial class BuildOptions
     {
-        [JsonProperty("outputPath", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonPropertyName("outputPath")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string OutputPath { get; set; }
 
-        [JsonProperty("index", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonPropertyName("index")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string Index { get; set; }
 
-        [JsonProperty("main")]
+        [JsonPropertyName("main")]
         public string Main { get; set; }
 
-        [JsonProperty("polyfills")]
+        [JsonPropertyName("polyfills")]
         public string Polyfills { get; set; }
 
-        [JsonProperty("tsConfig")]
+        [JsonPropertyName("tsConfig")]
         public string TsConfig { get; set; }
 
-        [JsonProperty("assets")]
+        [JsonPropertyName("assets")]
         public string[] Assets { get; set; }
 
-        [JsonProperty("styles")]
+        [JsonPropertyName("styles")]
         public string[] Styles { get; set; }
 
-        [JsonProperty("scripts")]
+        [JsonPropertyName("scripts")]
         public object[] Scripts { get; set; }
 
-        [JsonProperty("karmaConfig", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonPropertyName("karmaConfig")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string KarmaConfig { get; set; }
     }
 
     public partial class ExtractI18N
     {
-        [JsonProperty("builder")]
+        [JsonPropertyName("builder")]
         public string Builder { get; set; }
 
-        [JsonProperty("options")]
+        [JsonPropertyName("options")]
         public DevelopmentClass Options { get; set; }
     }
 
     public partial class DevelopmentClass
     {
-        [JsonProperty("browserTarget")]
+        [JsonPropertyName("browserTarget")]
         public string BrowserTarget { get; set; }
     }
 
     public partial class Serve
     {
-        [JsonProperty("builder")]
+        [JsonPropertyName("builder")]
         public string Builder { get; set; }
 
-        [JsonProperty("configurations")]
+        [JsonPropertyName("configurations")]
         public ServeConfigurations Configurations { get; set; }
 
-        [JsonProperty("defaultConfiguration")]
+        [JsonPropertyName("defaultConfiguration")]
         public string DefaultConfiguration { get; set; }
     }
 
     public partial class ServeConfigurations
     {
-        [JsonProperty("production")]
+        [JsonPropertyName("production")]
         public DevelopmentClass Production { get; set; }
 
-        [JsonProperty("development")]
+        [JsonPropertyName("development")]
         public DevelopmentClass Development { get; set; }
     }
 
     public partial class Test
     {
-        [JsonProperty("builder")]
+        [JsonPropertyName("builder")]
         public string Builder { get; set; }
 
-        [JsonProperty("options")]
+        [JsonPropertyName("options")]
         public BuildOptions Options { get; set; }
     }
 
     public partial class Schematics
     {
-        [JsonProperty("@schematics/angular:application")]
+        [JsonPropertyName("@schematics/angular:application")]
         public SchematicsAngularApplication SchematicsAngularApplication { get; set; }
     }
 
     public partial class SchematicsAngularApplication
     {
-        [JsonProperty("strict")]
+        [JsonPropertyName("strict")]
         public bool Strict { get; set; }
     }
 
     public partial class TopLevel
     {
-        public static TopLevel FromJson(string json) => JsonConvert.DeserializeObject<TopLevel>(json, QuickType.Converter.Settings);
+        public static TopLevel FromJson(string json) => JsonSerializer.Deserialize<TopLevel>(json, QuickType.Converter.Settings);
     }
 
     public static class Serialize
     {
-        public static string ToJson(this TopLevel self) => JsonConvert.SerializeObject(self, QuickType.Converter.Settings);
+        public static string ToJson(this TopLevel self) => JsonSerializer.Serialize(self, QuickType.Converter.Settings);
     }
 
     internal static class Converter
     {
-        public static readonly JsonSerializerSettings Settings = new JsonSerializerSettings
+        public static readonly JsonSerializerOptions Settings = new(JsonSerializerDefaults.Web)
         {
-            MetadataPropertyHandling = MetadataPropertyHandling.Ignore,
-            DateParseHandling = DateParseHandling.None,
-            Converters =
-            {
-                new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.AssumeUniversal }
-            },
+            // MetadataPropertyHandling = MetadataPropertyHandling.Ignore,
+            // DateParseHandling = DateParseHandling.None,
+            // Converters =
+            // {
+            //     new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.AssumeUniversal }
+            // },
         };
     }
 }
