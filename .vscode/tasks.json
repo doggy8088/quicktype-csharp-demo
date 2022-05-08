@@ -4,6 +4,23 @@
     "args": [],
     "tasks": [
         {
+            "label": "quicktype&build",
+            "dependsOn": [
+                "prepare-test-data",
+                "quicktype",
+                "build"
+            ]
+        },
+        {
+            "label": "prepare-test-data",
+            "type": "shell",
+            "command": "cp",
+            "args": [
+                "${workspaceRoot}/samples/us-senators.json",
+                "${workspaceRoot}/samples/test.json"
+            ]
+        },
+        {
             "label": "build",
             "type": "shell",
             "command": "dotnet",
@@ -15,6 +32,25 @@
             "group": {
                 "_id": "build",
                 "isDefault": false
+            }
+        },
+        {
+            "label": "quicktype",
+            "type": "process",
+            "command": "node",
+            "args": [
+                "dist/cli/index.js",
+                "${workspaceRoot}/samples/test.json",
+                "--lang",
+                // "C#",
+                "C# (System.Text.Json)",
+                "--top-level",
+                "TopLevel",
+                "--out",
+                "${workspaceRoot}/TopLevel.cs"
+            ],
+            "options": {
+                "cwd": "C:/Projects/quicktype"
             }
         }
     ]
