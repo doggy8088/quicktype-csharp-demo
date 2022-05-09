@@ -6,8 +6,8 @@
         {
             "label": "quicktype&build",
             "dependsOn": [
-                "prepare-test-data",
-                "quicktype",
+                // "prepare-test-data",
+                // "quicktype",
                 "build"
             ]
         },
